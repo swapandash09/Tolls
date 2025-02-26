@@ -1,17 +1,37 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fast and free online image compressor to reduce file size without losing quality.">
-    <meta name="keywords" content="image compressor, reduce image size, optimize images, webp, jpeg, png compression">
+    <meta name="description" content="Welcome to our online tools dashboard - Access Image Compressor & more!">
+    <meta name="keywords" content="dashboard, online tools, image compressor, free tools">
     <meta name="author" content="YourWebsiteName">
-    <title>Image Compressor - Optimize & Reduce File Size</title>
+    <title>Dashboard - Online Tools</title>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: linear-gradient(135deg, #0F2027, #203A43, #2C5364); color: white; text-align: center; padding: 20px; }
+        body { background: #121212; color: white; text-align: center; padding: 20px; }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover { color: #ff9800; }
 
         .container {
             background: rgba(255, 255, 255, 0.1);
@@ -23,105 +43,49 @@
             margin: auto;
         }
 
-        #dropZone {
-            border: 2px dashed white;
-            padding: 20px;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: 0.3s;
+        .tools {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        #dropZone:hover { background: rgba(255, 255, 255, 0.2); }
-
-        input[type="file"] { display: none; }
-
-        input[type="range"] { width: 100%; margin: 10px 0; }
-
-        button, .download-btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        button { background: #4CAF50; color: white; }
-        button:hover { background: #3e8e41; transform: scale(1.05); }
-
-        .download-btn {
-            background: #FF9800;
+        .tool-link {
+            background: #ff9800;
             color: white;
-            font-weight: bold;
-            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+            display: block;
         }
 
-        .download-btn:hover { background: #F57C00; transform: scale(1.05); }
+        .tool-link:hover { background: #f57c00; transform: scale(1.05); }
 
-        @media screen and (max-width: 768px) { .container { width: 95%; } }
+        @media screen and (max-width: 768px) {
+            .navbar { flex-direction: column; align-items: center; gap: 10px; }
+        }
     </style>
-
 </head>
 <body>
 
-    <div class="container">
-        <h1>Image Compressor - Optimize & Reduce File Size</h1>
-        
-        <label id="dropZone" for="uploadImage">📤 Drag & Drop or Click to Upload</label>
-        <input type="file" id="uploadImage" accept="image/*">
-
-        <label for="quality">Select Compression Level: <span id="qualityValue">70%</span></label>
-        <input type="range" id="quality" min="10" max="100" value="70">
-
-        <button onclick="compressImage()">Compress Image</button>
-        <a id="downloadBtn" class="download-btn">Download Compressed Image</a>
-
-        <div id="previewContainer"></div>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
     </div>
 
-    <script>
-        document.getElementById("quality").addEventListener("input", function() {
-            document.getElementById("qualityValue").innerText = this.value + "%";
-        });
+    <div class="container">
+        <h1>Welcome to Our Online Tools Dashboard</h1>
+        <p>Access the best tools to optimize and manage your files efficiently.</p>
 
-        document.getElementById("dropZone").addEventListener("click", function() {
-            document.getElementById("uploadImage").click();
-        });
-
-        function compressImage() {
-            let fileInput = document.getElementById("uploadImage").files[0];
-            let quality = document.getElementById("quality").value / 100;
-
-            if (!fileInput) {
-                alert("Please select an image first.");
-                return;
-            }
-
-            let reader = new FileReader();
-            reader.readAsDataURL(fileInput);
-            reader.onload = function(event) {
-                let img = new Image();
-                img.src = event.target.result;
-                img.onload = function() {
-                    let canvas = document.createElement("canvas");
-                    let ctx = canvas.getContext("2d");
-
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    ctx.drawImage(img, 0, 0, img.width, img.height);
-
-                    let compressedData = canvas.toDataURL("image/jpeg", quality);
-                    
-                    let downloadBtn = document.getElementById("downloadBtn");
-                    downloadBtn.href = compressedData;
-                    downloadBtn.download = "compressed-image.jpg";
-                    downloadBtn.style.display = "inline-block";
-                };
-            };
-        }
-    </script>
+        <div class="tools">
+            <a href="img-compress.html" class="tool-link">📸 Image Compressor</a>
+            <a href="tools.html" class="tool-link">🛠 More Tools Coming Soon</a>
+        </div>
+    </div>
 
 </body>
 </html>
