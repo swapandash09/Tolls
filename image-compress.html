@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compress images online easily without losing quality. Fast and free image compressor tool.">
+    <meta name="keywords" content="image compressor, online image compression, reduce image size, png compressor, jpg compressor">
+    <meta name="author" content="YourWebsiteName">
+    <title>Image Compressor - Reduce Image Size Online</title>
+
+    <!-- 🌟 SEO & Open Graph Tags -->
+    <meta property="og:title" content="Image Compressor - Free Online Tool">
+    <meta property="og:description" content="Compress images easily and reduce file size without quality loss.">
+    <meta property="og:image" content="https://yourwebsite.com/image-compressor-thumbnail.jpg">
+    <meta property="og:url" content="https://yourwebsite.com/image-compressor">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- 🌟 CSS Styling -->
+    <style>
+        /* 🌟 Global Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        /* 🌟 Body */
+        body {
+            background: #f8f9fa;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 🌟 Container */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 { color: #222; margin-bottom: 20px; }
+        .subtitle { color: #555; margin-bottom: 30px; }
+
+        /* 🌟 Upload Box */
+        .upload-box {
+            border: 2px dashed #007bff;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            background: #e9f5ff;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .upload-box:hover {
+            background: #d8efff;
+        }
+
+        .upload-box input {
+            display: none;
+        }
+
+        .upload-box p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #007bff;
+        }
+
+        /* 🌟 Preview */
+        .preview {
+            margin-top: 20px;
+        }
+
+        .preview img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 🌟 Compression Controls */
+        .controls {
+            margin-top: 20px;
+        }
+
+        .slider {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* 🌟 Buttons */
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        /* 🌟 Download Link */
+        .download-link {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .download-link a {
+            color: #28a745;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .download-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>🚀 Image Compressor</h1>
+        <p class="subtitle">Reduce image size without losing quality</p>
+
+        <!-- 🌟 Upload Box -->
+        <div class="upload-box" onclick="document.getElementById('fileInput').click();">
+            <input type="file" id="fileInput" accept="image/*">
+            <p>📂 Click to Upload Image</p>
+        </div>
+
+        <!-- 🌟 Preview Image -->
+        <div class="preview" id="previewContainer">
+            <img id="previewImage" src="" alt="Image Preview" style="display: none;">
+        </div>
+
+        <!-- 🌟 Compression Controls -->
+        <div class="controls" id="controlsContainer" style="display: none;">
+            <label for="qualityRange">Compression Level:</label>
+            <input type="range" id="qualityRange" class="slider" min="10" max="100" value="80">
+            <p>Quality: <span id="qualityValue">80</span>%</p>
+            <button class="btn" onclick="compressImage()">Compress Image</button>
+        </div>
+
+        <!-- 🌟 Download Link -->
+        <div class="download-link" id="downloadContainer">
+            <a id="downloadLink" href="#" download>⬇ Download Compressed Image</a>
+        </div>
+    </div>
+
+    <!-- 🌟 JavaScript Logic -->
+    <script>
+        let selectedFile;
+
+        // Handle File Upload
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            selectedFile = event.target.files[0];
+            if (selectedFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImage').src = e.target.result;
+                    document.getElementById('previewImage').style.display = 'block';
+                    document.getElementById('controlsContainer').style.display = 'block';
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        });
+
+        // Update Quality Percentage
+        document.getElementById('qualityRange').addEventListener('input', function() {
+            document.getElementById('qualityValue').textContent = this.value;
+        });
+
+        // Compress Image
+        function compressImage() {
+            if (!selectedFile) {
+                alert("Please upload an image first.");
+                return;
+            }
+
+            const quality = document.getElementById('qualityRange').value / 100;
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+
+                const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                document.getElementById('downloadLink').href = compressedDataUrl;
+                document.getElementById('downloadContainer').style.display = 'block';
+            };
+
+            img.src = URL.createObjectURL(selectedFile);
+        }
+    </script>
+
+</body>
+</html>
