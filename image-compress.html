@@ -3,205 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Compress images online easily without losing quality. Fast and free image compressor tool.">
-    <meta name="keywords" content="image compressor, online image compression, reduce image size, png compressor, jpg compressor">
-    <meta name="author" content="YourWebsiteName">
-    <title>Image Compressor - Reduce Image Size Online</title>
-
-    <!-- 🌟 SEO & Open Graph Tags -->
-    <meta property="og:title" content="Image Compressor - Free Online Tool">
-    <meta property="og:description" content="Compress images easily and reduce file size without quality loss.">
-    <meta property="og:image" content="https://yourwebsite.com/image-compressor-thumbnail.jpg">
-    <meta property="og:url" content="https://yourwebsite.com/image-compressor">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- 🌟 CSS Styling -->
+    <title>Image Compressor - ToolVerse</title>
     <style>
-        /* 🌟 Global Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
-        /* 🌟 Body */
-        body {
-            background: #f8f9fa;
-            color: #333;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* 🌟 Container */
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        h1 { color: #222; margin-bottom: 20px; }
-        .subtitle { color: #555; margin-bottom: 30px; }
-
-        /* 🌟 Upload Box */
-        .upload-box {
-            border: 2px dashed #007bff;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            background: #e9f5ff;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-
-        .upload-box:hover {
-            background: #d8efff;
-        }
-
-        .upload-box input {
-            display: none;
-        }
-
-        .upload-box p {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #007bff;
-        }
-
-        /* 🌟 Preview */
-        .preview {
-            margin-top: 20px;
-        }
-
-        .preview img {
-            max-width: 100%;
-            border-radius: 5px;
-            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 🌟 Compression Controls */
-        .controls {
-            margin-top: 20px;
-        }
-
-        .slider {
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        /* 🌟 Buttons */
-        .btn {
-            background: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: #0056b3;
-        }
-
-        /* 🌟 Download Link */
-        .download-link {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .download-link a {
-            color: #28a745;
-            font-size: 18px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .download-link a:hover {
-            text-decoration: underline;
-        }
+        body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .container { background: white; width: 450px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; }
+        h1 { font-size: 28px; color: #0288d1; margin-bottom: 20px; }
+        .icon { width: 60px; margin-bottom: 15px; filter: drop-shadow(0 2px 5px rgba(2, 136, 209, 0.3)); }
+        .input-group { margin: 20px 0; }
+        input[type="file"] { display: none; }
+        .custom-file-upload { display: inline-block; padding: 12px 25px; background: #0288d1; color: white; border-radius: 25px; cursor: pointer; transition: background 0.3s ease; }
+        .custom-file-upload:hover { background: #0277bd; }
+        .quality-select { margin-top: 15px; }
+        select { padding: 10px; width: 150px; border: 2px solid #0288d1; border-radius: 10px; font-size: 14px; color: #0288d1; }
+        button { padding: 12px 30px; background: #26a69a; color: white; border: none; border-radius: 25px; font-size: 16px; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
+        button:hover { transform: scale(1.05); background: #00897b; }
+        .download-link { display: none; margin-top: 20px; text-decoration: none; color: #0288d1; font-weight: bold; transition: color 0.3s ease; }
+        .download-link:hover { color: #01579b; }
     </style>
-
 </head>
 <body>
-
     <div class="container">
-        <h1>🚀 Image Compressor</h1>
-        <p class="subtitle">Reduce image size without losing quality</p>
-
-        <!-- 🌟 Upload Box -->
-        <div class="upload-box" onclick="document.getElementById('fileInput').click();">
-            <input type="file" id="fileInput" accept="image/*">
-            <p>📂 Click to Upload Image</p>
+        <img src="https://img.icons8.com/ios-filled/60/0288d1/image.png" alt="Image Compressor Icon" class="icon">
+        <h1>Image Compressor</h1>
+        <div class="input-group">
+            <label for="imageInput" class="custom-file-upload">Choose Image</label>
+            <input type="file" id="imageInput" accept="image/*">
+            <div class="quality-select">
+                <label for="quality">Quality:</label>
+                <select id="quality">
+                    <option value="90">High (90%)</option>
+                    <option value="70" selected>Medium (70%)</option>
+                    <option value="50">Low (50%)</option>
+                </select>
+            </div>
         </div>
-
-        <!-- 🌟 Preview Image -->
-        <div class="preview" id="previewContainer">
-            <img id="previewImage" src="" alt="Image Preview" style="display: none;">
-        </div>
-
-        <!-- 🌟 Compression Controls -->
-        <div class="controls" id="controlsContainer" style="display: none;">
-            <label for="qualityRange">Compression Level:</label>
-            <input type="range" id="qualityRange" class="slider" min="10" max="100" value="80">
-            <p>Quality: <span id="qualityValue">80</span>%</p>
-            <button class="btn" onclick="compressImage()">Compress Image</button>
-        </div>
-
-        <!-- 🌟 Download Link -->
-        <div class="download-link" id="downloadContainer">
-            <a id="downloadLink" href="#" download>⬇ Download Compressed Image</a>
-        </div>
+        <button onclick="compressImage()">Compress Now</button>
+        <a id="downloadLink" class="download-link" download="compressed_image.jpg">Download Compressed Image</a>
     </div>
 
-    <!-- 🌟 JavaScript Logic -->
     <script>
-        let selectedFile;
-
-        // Handle File Upload
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            selectedFile = event.target.files[0];
-            if (selectedFile) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('previewImage').src = e.target.result;
-                    document.getElementById('previewImage').style.display = 'block';
-                    document.getElementById('controlsContainer').style.display = 'block';
-                };
-                reader.readAsDataURL(selectedFile);
+        async function compressImage() {
+            const fileInput = document.getElementById('imageInput');
+            const quality = document.getElementById('quality').value;
+            const file = fileInput.files[0];
+            if (!file) { alert("Pehle ek image chuno!"); return; }
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('quality', quality);
+            try {
+                const response = await fetch('http://localhost:5000/compress', {
+                    method: 'POST',
+                    body: formData
+                });
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = url;
+                downloadLink.style.display = 'block';
+            } catch (error) {
+                alert("Kuch galat ho gaya, dobara try karo!");
             }
-        });
-
-        // Update Quality Percentage
-        document.getElementById('qualityRange').addEventListener('input', function() {
-            document.getElementById('qualityValue').textContent = this.value;
-        });
-
-        // Compress Image
-        function compressImage() {
-            if (!selectedFile) {
-                alert("Please upload an image first.");
-                return;
-            }
-
-            const quality = document.getElementById('qualityRange').value / 100;
-
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const img = new Image();
-
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0, img.width, img.height);
-
-                const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
-                document.getElementById('downloadLink').href = compressedDataUrl;
-                document.getElementById('downloadContainer').style.display = 'block';
-            };
-
-            img.src = URL.createObjectURL(selectedFile);
         }
+        document.getElementById('imageInput').addEventListener('change', function() {
+            const fileName = this.files[0]?.name || "Koi file nahi chuni";
+            document.querySelector('.custom-file-upload').textContent = fileName;
+        });
     </script>
-
 </body>
 </html>
