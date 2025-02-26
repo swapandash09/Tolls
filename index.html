@@ -7,19 +7,13 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; color: #333; }
-        
-        /* Navbar */
         .navbar { background: #0288d1; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(2, 136, 209, 0.2); position: sticky; top: 0; z-index: 10; }
         .navbar h1 { font-size: 28px; color: white; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
         .nav-links a { color: white; text-decoration: none; margin: 0 20px; font-size: 16px; transition: color 0.3s ease, transform 0.3s ease; }
         .nav-links a:hover { color: #ffd700; transform: scale(1.1); }
-
-        /* Hero Section */
         .hero { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #0288d1, #26a69a); color: white; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
         .hero h2 { font-size: 40px; margin-bottom: 15px; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); }
         .hero p { font-size: 20px; font-weight: 300; }
-
-        /* Dashboard */
         .dashboard { display: flex; flex-wrap: wrap; justify-content: center; padding: 50px 20px; gap: 25px; }
         .tool-card { background: white; width: 280px; padding: 25px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .tool-card:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); }
@@ -27,15 +21,12 @@
         .tool-card h3 { font-size: 20px; color: #0288d1; margin-bottom: 10px; }
         .tool-card a { display: inline-block; padding: 10px 20px; background: #26a69a; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: background 0.3s ease, transform 0.3s ease; }
         .tool-card a:hover { background: #00897b; transform: scale(1.05); }
-
-        /* Footer */
         .footer { background: #0288d1; color: white; text-align: center; padding: 20px; font-size: 14px; }
         .footer a { color: #ffd700; text-decoration: none; margin: 0 10px; transition: color 0.3s ease; }
         .footer a:hover { color: #fff176; }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <div class="navbar">
         <h1>ToolVerse</h1>
         <div class="nav-links">
@@ -46,14 +37,10 @@
             <a href="#terms">T&C</a>
         </div>
     </div>
-
-    <!-- Hero Section -->
     <div class="hero">
         <h2>ToolVerse - Your Ultimate Toolkit</h2>
         <p>Empower your workflow with seamless, innovative tools.</p>
     </div>
-
-    <!-- Dashboard -->
     <div class="dashboard">
         <div class="tool-card">
             <img src="https://img.icons8.com/ios-filled/60/0288d1/image.png" alt="Image Compressor Icon">
@@ -65,45 +52,12 @@
             <h3>PDF to JPG</h3>
             <a href="pdf_to_jpg.html">Use Now</a>
         </div>
-        <div class="tool-card">
-            <img src="https://img.icons8.com/ios-filled/60/0288d1/edit.png" alt="Text Editor Icon">
-            <h3>Text Editor</h3>
-            <a href="text_editor.html">Use Now</a>
-        </div>
-        <div class="tool-card">
-            <img src="https://img.icons8.com/ios-filled/60/0288d1/merge-files.png" alt="File Merger Icon">
-            <h3>File Merger</h3>
-            <a href="file_merger.html">Use Now</a>
-        </div>
-        <div class="tool-card">
-            <img src="https://img.icons8.com/ios-filled/60/0288d1/resize.png" alt="Image Resizer Icon">
-            <h3>Image Resizer</h3>
-            <a href="image_resizer.html">Use Now</a>
-        </div>
-        <div class="tool-card">
-            <img src="https://img.icons8.com/ios-filled/60/0288d1/qr-code.png" alt="QR Code Generator Icon">
-            <h3>QR Code Generator</h3>
-            <a href="qr_code_generator.html">Use Now</a>
-        </div>
-        <div class="tool-card">
-            <img src="https://img.icons8.com/ios-filled/60/0288d1/color-dropper.png" alt="Color Picker Icon">
-            <h3>Color Picker</h3>
-            <a href="color_picker.html">Use Now</a>
-        </div>
-        <div class="tool-card">
-            <img src="https://img.icons8.com/ios-filled/60/0288d1/microphone.png" alt="Voice to Text Icon">
-            <h3>Voice to Text</h3>
-            <a href="voice_to_text.html">Use Now</a>
-        </div>
+        <!-- Baaki tools yahan add karenge -->
     </div>
-
-    <!-- Footer -->
     <div class="footer">
         <p>© 2025 ToolVerse | <a href="#about">About</a> | <a href="#services">Services</a> | <a href="#contact">Contact</a> | <a href="#team">Team</a> | <a href="#terms">Terms & Conditions</a></p>
     </div>
-
     <script>
-        // Smooth scroll for nav links (optional)
         document.querySelectorAll('.nav-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
