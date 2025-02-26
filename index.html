@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to our online tools dashboard - Access Image Compressor & more!">
-    <meta name="keywords" content="dashboard, online tools, image compressor, free tools">
+    <meta name="description" content="Explore the best online tools - Image Compressor & more. Fast, secure, and easy to use!">
+    <meta name="keywords" content="dashboard, online tools, image compressor, free web tools">
     <meta name="author" content="YourWebsiteName">
     <title>Dashboard - Online Tools</title>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: linear-gradient(135deg, #0F2027, #203A43, #2C5364); color: white; text-align: center; padding: 20px; }
+        body { background: #f4f4f4; color: #333; text-align: center; padding: 20px; }
 
         .navbar {
             display: flex;
             justify-content: center;
             gap: 20px;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: #222;
             border-radius: 10px;
             margin-bottom: 30px;
         }
@@ -34,7 +33,7 @@
         .navbar a:hover { color: #ff9800; }
 
         .container {
-            background: rgba(255, 255, 255, 0.1);
+            background: white;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
@@ -62,6 +61,10 @@
         }
 
         .tool-link:hover { background: #f57c00; transform: scale(1.05); }
+
+        @media screen and (max-width: 768px) {
+            .navbar { flex-direction: column; align-items: center; gap: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -74,8 +77,8 @@
     </div>
 
     <div class="container">
-        <h1>Welcome to Our Online Tools Dashboard</h1>
-        <p>Access the best tools to optimize and manage your files efficiently.</p>
+        <h1>Welcome to Our Online Tools</h1>
+        <p>Optimize and manage your files with the best free tools.</p>
 
         <div class="tools">
             <a href="img-compress.html" class="tool-link">📸 Image Compressor</a>
