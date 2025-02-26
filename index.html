@@ -3,86 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore the best online tools - Image Compressor & more. Fast, secure, and easy to use!">
-    <meta name="keywords" content="dashboard, online tools, image compressor, free web tools">
+    <meta name="description" content="All-in-One Online Tools - Image Compressor, File Converter, and More">
+    <meta name="keywords" content="online tools, image compressor, file converter, SEO tools, free online tools">
     <meta name="author" content="YourWebsiteName">
-    <title>Dashboard - Online Tools</title>
+    <title>Dashboard - All Online Tools</title>
 
+    <!-- 🌟 CSS Styling -->
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #f4f4f4; color: #333; text-align: center; padding: 20px; }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 15px;
-            background: #222;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .navbar a:hover { color: #ff9800; }
-
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .tools {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .tool-link {
-            background: #ff9800;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 18px;
-            transition: 0.3s;
-            display: block;
-        }
-
-        .tool-link:hover { background: #f57c00; transform: scale(1.05); }
-
-        @media screen and (max-width: 768px) {
-            .navbar { flex-direction: column; align-items: center; gap: 10px; }
-        }
+        body { background: #f4f4f4; text-align: center; padding: 30px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); }
+        h1 { color: #222; margin-bottom: 10px; }
+        p { color: #555; margin-bottom: 20px; }
+        .tools-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .tool-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2); width: 250px; text-align: center; transition: 0.3s; }
+        .tool-card:hover { background: #e3f2fd; transform: scale(1.05); }
+        .tool-card a { text-decoration: none; font-size: 18px; font-weight: bold; color: #007bff; display: block; margin-top: 10px; }
+        .tool-card a:hover { text-decoration: underline; }
     </style>
+
 </head>
 <body>
 
-    <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
-    </div>
-
     <div class="container">
-        <h1>Welcome to Our Online Tools</h1>
-        <p>Optimize and manage your files with the best free tools.</p>
+        <h1>🚀 Online Tools Dashboard</h1>
+        <p>Access all our powerful tools in one place</p>
 
-        <div class="tools">
-            <a href="img-compress.html" class="tool-link">📸 Image Compressor</a>
-            <a href="tools.html" class="tool-link">🛠 More Tools Coming Soon</a>
+        <div class="tools-container">
+            <!-- 🌟 Image Compressor -->
+            <div class="tool-card">
+                <h3>🖼️ Image Compressor</h3>
+                <p>Reduce image size without losing quality</p>
+                <a href="tools/image-compressor.html">Open Tool</a>
+            </div>
+
+            <!-- 🌟 File Converter -->
+            <div class="tool-card">
+                <h3>📂 File Converter</h3>
+                <p>Convert files to different formats</p>
+                <a href="tools/file-converter.html">Open Tool</a>
+            </div>
+
+            <!-- 🌟 Text to Speech -->
+            <div class="tool-card">
+                <h3>🎙️ Text to Speech</h3>
+                <p>Convert text into natural voice</p>
+                <a href="tools/text-to-speech.html">Open Tool</a>
+            </div>
+
+            <!-- 🌟 QR Code Generator -->
+            <div class="tool-card">
+                <h3>🔲 QR Code Generator</h3>
+                <p>Create QR codes for URLs & Text</p>
+                <a href="tools/qr-generator.html">Open Tool</a>
+            </div>
+
+            <!-- 🌟 Password Generator -->
+            <div class="tool-card">
+                <h3>🔐 Password Generator</h3>
+                <p>Generate strong passwords</p>
+                <a href="tools/password-generator.html">Open Tool</a>
+            </div>
+
+            <!-- 🌟 SEO Analyzer -->
+            <div class="tool-card">
+                <h3>📊 SEO Analyzer</h3>
+                <p>Check website SEO performance</p>
+                <a href="tools/seo-analyzer.html">Open Tool</a>
+            </div>
         </div>
     </div>
 
