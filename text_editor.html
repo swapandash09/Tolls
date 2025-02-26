@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Editor - ToolVerse</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #fff3e0, #ffe0b2); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .container { background: white; width: 600px; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; }
+        h1 { font-size: 30px; color: #f57c00; margin-bottom: 20px; }
+        .icon { width: 65px; margin-bottom: 15px; filter: drop-shadow(0 3px 6px rgba(245, 124, 0, 0.3)); }
+        textarea { width: 100%; height: 250px; padding: 15px; border: 2px solid #f57c00; border-radius: 15px; font-size: 16px; color: #333; resize: none; background: #fff8e1; transition: border-color 0.3s ease; }
+        textarea:focus { border-color: #ef6c00; outline: none; }
+        .button-group { margin-top: 20px; }
+        button { padding: 12px 30px; background: #f57c00; color: white; border: none; border-radius: 30px; font-size: 16px; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; margin: 0 10px; }
+        button:hover { transform: scale(1.05); background: #ef6c00; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://img.icons8.com/ios-filled/65/f57c00/edit.png" alt="Text Editor Icon" class="icon">
+        <h1>Text Editor</h1>
+        <textarea id="textInput" placeholder="Yahan text likho..."></textarea>
+        <div class="button-group">
+            <button onclick="saveText()">Save as TXT</button>
+            <button onclick="clearText()">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        function saveText() {
+            const text = document.getElementById('textInput').value;
+            if (!text) { alert("Pehle kuch likho!"); return; }
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'edited_text.txt';
+            a.click();
+            URL.revokeObjectURL(url); // Memory cleanup
+        }
+
+        function clearText() {
+            const textInput = document.getElementById('textInput');
+            textInput.value = '';
+        }
+    </script>
+</body>
+</html>
