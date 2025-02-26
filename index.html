@@ -3,76 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="All-in-One Online Tools - Image Compressor, File Converter, and More">
-    <meta name="keywords" content="online tools, image compressor, file converter, SEO tools, free online tools">
-    <meta name="author" content="YourWebsiteName">
-    <title>Dashboard - All Online Tools</title>
-
-    <!-- 🌟 CSS Styling -->
+    <title>ToolVerse - Your Ultimate Toolkit</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #f4f4f4; text-align: center; padding: 30px; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); }
-        h1 { color: #222; margin-bottom: 10px; }
-        p { color: #555; margin-bottom: 20px; }
-        .tools-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .tool-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2); width: 250px; text-align: center; transition: 0.3s; }
-        .tool-card:hover { background: #e3f2fd; transform: scale(1.05); }
-        .tool-card a { text-decoration: none; font-size: 18px; font-weight: bold; color: #007bff; display: block; margin-top: 10px; }
-        .tool-card a:hover { text-decoration: underline; }
-    </style>
+        body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; color: #333; }
+        
+        /* Navbar */
+        .navbar { background: #0288d1; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(2, 136, 209, 0.2); position: sticky; top: 0; z-index: 10; }
+        .navbar h1 { font-size: 28px; color: white; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+        .nav-links a { color: white; text-decoration: none; margin: 0 20px; font-size: 16px; transition: color 0.3s ease, transform 0.3s ease; }
+        .nav-links a:hover { color: #ffd700; transform: scale(1.1); }
 
+        /* Hero Section */
+        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #0288d1, #26a69a); color: white; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+        .hero h2 { font-size: 40px; margin-bottom: 15px; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); }
+        .hero p { font-size: 20px; font-weight: 300; }
+
+        /* Dashboard */
+        .dashboard { display: flex; flex-wrap: wrap; justify-content: center; padding: 50px 20px; gap: 25px; }
+        .tool-card { background: white; width: 280px; padding: 25px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .tool-card:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); }
+        .tool-card img { width: 60px; margin-bottom: 15px; filter: drop-shadow(0 2px 5px rgba(2, 136, 209, 0.3)); }
+        .tool-card h3 { font-size: 20px; color: #0288d1; margin-bottom: 10px; }
+        .tool-card a { display: inline-block; padding: 10px 20px; background: #26a69a; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: background 0.3s ease, transform 0.3s ease; }
+        .tool-card a:hover { background: #00897b; transform: scale(1.05); }
+
+        /* Footer */
+        .footer { background: #0288d1; color: white; text-align: center; padding: 20px; font-size: 14px; }
+        .footer a { color: #ffd700; text-decoration: none; margin: 0 10px; transition: color 0.3s ease; }
+        .footer a:hover { color: #fff176; }
+    </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>🚀 Online Tools Dashboard</h1>
-        <p>Access all our powerful tools in one place</p>
-
-        <div class="tools-container">
-            <!-- 🌟 Image Compressor -->
-            <div class="tool-card">
-                <h3>🖼️ Image Compressor</h3>
-                <p>Reduce image size without losing quality</p>
-                <a href="tools/image-compressor.html">Open Tool</a>
-            </div>
-
-            <!-- 🌟 File Converter -->
-            <div class="tool-card">
-                <h3>📂 File Converter</h3>
-                <p>Convert files to different formats</p>
-                <a href="tools/file-converter.html">Open Tool</a>
-            </div>
-
-            <!-- 🌟 Text to Speech -->
-            <div class="tool-card">
-                <h3>🎙️ Text to Speech</h3>
-                <p>Convert text into natural voice</p>
-                <a href="tools/text-to-speech.html">Open Tool</a>
-            </div>
-
-            <!-- 🌟 QR Code Generator -->
-            <div class="tool-card">
-                <h3>🔲 QR Code Generator</h3>
-                <p>Create QR codes for URLs & Text</p>
-                <a href="tools/qr-generator.html">Open Tool</a>
-            </div>
-
-            <!-- 🌟 Password Generator -->
-            <div class="tool-card">
-                <h3>🔐 Password Generator</h3>
-                <p>Generate strong passwords</p>
-                <a href="tools/password-generator.html">Open Tool</a>
-            </div>
-
-            <!-- 🌟 SEO Analyzer -->
-            <div class="tool-card">
-                <h3>📊 SEO Analyzer</h3>
-                <p>Check website SEO performance</p>
-                <a href="tools/seo-analyzer.html">Open Tool</a>
-            </div>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>ToolVerse</h1>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+            <a href="#team">Team</a>
+            <a href="#terms">T&C</a>
         </div>
     </div>
 
+    <!-- Hero Section -->
+    <div class="hero">
+        <h2>ToolVerse - Your Ultimate Toolkit</h2>
+        <p>Empower your workflow with seamless, innovative tools.</p>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/image.png" alt="Image Compressor Icon">
+            <h3>Image Compressor</h3>
+            <a href="image_compressor.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/pdf.png" alt="PDF to JPG Icon">
+            <h3>PDF to JPG</h3>
+            <a href="pdf_to_jpg.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/edit.png" alt="Text Editor Icon">
+            <h3>Text Editor</h3>
+            <a href="text_editor.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/merge-files.png" alt="File Merger Icon">
+            <h3>File Merger</h3>
+            <a href="file_merger.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/resize.png" alt="Image Resizer Icon">
+            <h3>Image Resizer</h3>
+            <a href="image_resizer.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/qr-code.png" alt="QR Code Generator Icon">
+            <h3>QR Code Generator</h3>
+            <a href="qr_code_generator.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/color-dropper.png" alt="Color Picker Icon">
+            <h3>Color Picker</h3>
+            <a href="color_picker.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/microphone.png" alt="Voice to Text Icon">
+            <h3>Voice to Text</h3>
+            <a href="voice_to_text.html">Use Now</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 ToolVerse | <a href="#about">About</a> | <a href="#services">Services</a> | <a href="#contact">Contact</a> | <a href="#team">Team</a> | <a href="#terms">Terms & Conditions</a></p>
+    </div>
+
+    <script>
+        // Smooth scroll for nav links (optional)
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>
