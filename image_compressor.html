@@ -7,24 +7,24 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-        .container { background: white; width: 450px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; }
-        h1 { font-size: 28px; color: #0288d1; margin-bottom: 20px; }
-        .icon { width: 60px; margin-bottom: 15px; filter: drop-shadow(0 2px 5px rgba(2, 136, 209, 0.3)); }
-        .input-group { margin: 20px 0; }
+        .container { background: white; width: 480px; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; }
+        h1 { font-size: 30px; color: #0288d1; margin-bottom: 20px; }
+        .icon { width: 65px; margin-bottom: 15px; filter: drop-shadow(0 3px 6px rgba(2, 136, 209, 0.3)); }
+        .input-group { margin: 25px 0; }
         input[type="file"] { display: none; }
-        .custom-file-upload { display: inline-block; padding: 12px 25px; background: #0288d1; color: white; border-radius: 25px; cursor: pointer; transition: background 0.3s ease; }
-        .custom-file-upload:hover { background: #0277bd; }
-        .quality-select { margin-top: 15px; }
-        select { padding: 10px; width: 150px; border: 2px solid #0288d1; border-radius: 10px; font-size: 14px; color: #0288d1; }
-        button { padding: 12px 30px; background: #26a69a; color: white; border: none; border-radius: 25px; font-size: 16px; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
+        .custom-file-upload { display: inline-block; padding: 12px 30px; background: #0288d1; color: white; border-radius: 30px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; }
+        .custom-file-upload:hover { background: #0277bd; transform: scale(1.03); }
+        .quality-select { margin-top: 20px; }
+        select { padding: 12px; width: 160px; border: 2px solid #0288d1; border-radius: 12px; font-size: 15px; color: #0288d1; background: #f5faff; cursor: pointer; }
+        button { padding: 14px 35px; background: #26a69a; color: white; border: none; border-radius: 30px; font-size: 16px; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
         button:hover { transform: scale(1.05); background: #00897b; }
-        .download-link { display: none; margin-top: 20px; text-decoration: none; color: #0288d1; font-weight: bold; transition: color 0.3s ease; }
-        .download-link:hover { color: #01579b; }
+        .download-link { display: none; margin-top: 25px; padding: 10px 20px; background: #0288d1; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: background 0.3s ease; }
+        .download-link:hover { background: #01579b; }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://img.icons8.com/ios-filled/60/0288d1/image.png" alt="Image Compressor Icon" class="icon">
+        <img src="https://img.icons8.com/ios-filled/65/0288d1/image.png" alt="Image Compressor Icon" class="icon">
         <h1>Image Compressor</h1>
         <div class="input-group">
             <label for="imageInput" class="custom-file-upload">Choose Image</label>
@@ -48,26 +48,33 @@
             const quality = document.getElementById('quality').value;
             const file = fileInput.files[0];
             if (!file) { alert("Pehle ek image chuno!"); return; }
+
             const formData = new FormData();
             formData.append('image', file);
             formData.append('quality', quality);
+
             try {
                 const response = await fetch('http://localhost:5000/compress', {
                     method: 'POST',
                     body: formData
                 });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Something went wrong');
+                }
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
                 const downloadLink = document.getElementById('downloadLink');
                 downloadLink.href = url;
-                downloadLink.style.display = 'block';
+                downloadLink.style.display = 'inline-block';
             } catch (error) {
-                alert("Kuch galat ho gaya, dobara try karo!");
+                alert("Error: " + error.message);
             }
         }
+
         document.getElementById('imageInput').addEventListener('change', function() {
             const fileName = this.files[0]?.name || "Koi file nahi chuni";
-            document.querySelector('.custom-file-upload').textContent = fileName;
+            document.querySelector('.custom-file-upload').textContent = fileName.slice(0, 20) + (fileName.length > 20 ? "..." : "");
         });
     </script>
 </body>
