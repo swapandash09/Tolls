@@ -3,93 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore various online tools in one place. Fast, free, and user-friendly dashboard for image compression, conversion, and more.">
-    <meta name="keywords" content="dashboard, online tools, image compressor, file converter, SEO tools">
+    <meta name="description" content="Welcome to our online tools dashboard - Access Image Compressor & more!">
+    <meta name="keywords" content="dashboard, online tools, image compressor, free tools">
     <meta name="author" content="YourWebsiteName">
     <title>Dashboard - Online Tools</title>
 
-    <!-- SEO Optimization -->
-    <link rel="canonical" href="https://yourwebsite.com/dashboard">
-    <meta property="og:title" content="Dashboard - Access Online Tools">
-    <meta property="og:description" content="One-stop solution for all your online tools.">
-    <meta property="og:image" content="https://yourwebsite.com/thumbnail.jpg">
-    <meta property="og:url" content="https://yourwebsite.com/dashboard">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- 🌟 CSS Styling -->
     <style>
-        /* 🌟 Global Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        
-        /* 🌟 Body Styling */
-        body { background: linear-gradient(135deg, #1B1B1B, #292929); color: white; text-align: center; padding: 20px; }
+        body { background: linear-gradient(135deg, #0F2027, #203A43, #2C5364); color: white; text-align: center; padding: 20px; }
 
-        /* 🌟 Container */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover { color: #ff9800; }
+
         .container {
             background: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
             width: 90%;
-            max-width: 800px;
+            max-width: 600px;
             margin: auto;
         }
 
-        /* 🌟 Header */
-        h1 { font-size: 28px; margin-bottom: 10px; }
-        p { font-size: 16px; margin-bottom: 20px; }
-
-        /* 🌟 Links Styling */
-        .tools-list {
-            list-style: none;
-            padding: 0;
+        .tools {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .tools-list li {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 8px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .tools-list li:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
-
-        .tools-list a {
+        .tool-link {
+            background: #ff9800;
             color: white;
+            padding: 12px;
+            border-radius: 8px;
             text-decoration: none;
             font-size: 18px;
+            transition: 0.3s;
             display: block;
         }
 
-        /* 🌟 Responsive Design */
-        @media screen and (max-width: 768px) { .container { width: 95%; } }
+        .tool-link:hover { background: #f57c00; transform: scale(1.05); }
     </style>
-
 </head>
 <body>
 
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
+
     <div class="container">
-        <h1>⚡ Online Tools Dashboard</h1>
-        <p>Access various tools for your daily needs.</p>
+        <h1>Welcome to Our Online Tools Dashboard</h1>
+        <p>Access the best tools to optimize and manage your files efficiently.</p>
 
-        <ul class="tools-list">
-            <!-- 🌟 Static Image Compressor Link -->
-            <li><a href="img-compress.html">📷 Image Compressor</a></li>
-
-            <!-- 🌟 Dynamic Tools List -->
-            <script>
-                const toolsFolder = ["tool1.html", "tool2.html", "tool3.html"]; // 📌 Yeh tools folder ki files hai, isme actual files add karna.
-                
-                toolsFolder.forEach(file => {
-                    document.write(`<li><a href="tools/${file}">🛠️ ${file.replace('.html', '').replace('-', ' ')}</a></li>`);
-                });
-            </script>
-        </ul>
+        <div class="tools">
+            <a href="img-compress.html" class="tool-link">📸 Image Compressor</a>
+            <a href="tools.html" class="tool-link">🛠 More Tools Coming Soon</a>
+        </div>
     </div>
 
 </body>
