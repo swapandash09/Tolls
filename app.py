@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-# Basic route to check if server is running
+# Health Check Route
 @app.route('/', methods=['GET'])
 def health_check():
     return "ToolVerse Backend is Running!", 200
@@ -39,7 +39,7 @@ def compress_image():
         os.remove(output_path)
         return response
     except Exception as e:
-        print(f"Backend Error: {str(e)}")
+        print(f"Compress Error: {str(e)}")
         return f"Error: {str(e)}", 500
 
 # PDF to JPG
@@ -59,11 +59,17 @@ def pdf_to_jpg():
         images[0].save(output_path, 'JPEG', quality=95)
         os.remove(pdf_path)
         print(f"Saved file to: {output_path}")
-        response = send_file(output_path, as_attachment=True, download_name='converted_image.jpg')
+        with open(output_path, 'rb') as f:
+            response = send_file(
+                f,
+                mimetype='image/jpeg',
+                as_attachment=True,
+                download_name='converted_image.jpg'
+            )
         os.remove(output_path)
         return response
     except Exception as e:
-        print(f"Backend Error: {str(e)}")
+        print(f"PDF2JPG Error: {str(e)}")
         return f"Error: {str(e)}", 500
 
 # File Merger
@@ -83,11 +89,17 @@ def merge_files():
         merger.write(output_path)
         merger.close()
         print(f"Saved file to: {output_path}")
-        response = send_file(output_path, as_attachment=True, download_name='merged_file.pdf')
+        with open(output_path, 'rb') as f:
+            response = send_file(
+                f,
+                mimetype='application/pdf',
+                as_attachment=True,
+                download_name='merged_file.pdf'
+            )
         os.remove(output_path)
         return response
     except Exception as e:
-        print(f"Backend Error: {str(e)}")
+        print(f"Merge Error: {str(e)}")
         return f"Error: {str(e)}", 500
 
 # Image Resizer
@@ -102,16 +114,22 @@ def resize_image():
         width = int(request.form.get('width'))
         height = int(request.form.get('height'))
         print(f"Received file: {file.filename}, Width: {width}, Height: {height}")
-        img = Image.open(file)
+        img = Image.open(file.stream)
         img = img.resize((width, height), Image.Resampling.LANCZOS)
         output_path = 'resized_image.jpg'
         img.save(output_path, quality=95, optimize=True)
         print(f"Saved file to: {output_path}")
-        response = send_file(output_path, as_attachment=True, download_name='resized_image.jpg')
+        with open(output_path, 'rb') as f:
+            response = send_file(
+                f,
+                mimetype='image/jpeg',
+                as_attachment=True,
+                download_name='resized_image.jpg'
+            )
         os.remove(output_path)
         return response
     except Exception as e:
-        print(f"Backend Error: {str(e)}")
+        print(f"Resize Error: {str(e)}")
         return f"Error: {str(e)}", 500
 
 # Color Picker
@@ -124,14 +142,14 @@ def pick_color():
         if not file.filename:
             return "No file selected", 400
         print(f"Received file: {file.filename}")
-        img = Image.open(file).convert('RGB')
+        img = Image.open(file.stream).convert('RGB')
         colors = img.getpixel((img.width // 2, img.height // 2))
         color = f'#{colors[0]:02x}{colors[1]:02x}{colors[2]:02x}'
         return jsonify({'color': color})
     except Exception as e:
-        print(f"Backend Error: {str(e)}")
+        print(f"Color Pick Error: {str(e)}")
         return f"Error: {str(e)}", 500
 
 if __name__ == '__main__':
     print("Starting ToolVerse Backend...")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True) to 
