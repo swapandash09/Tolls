@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice to Text - ToolVerse</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .container { background: white; width: 600px; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; }
+        h1 { font-size: 30px; color: #0288d1; margin-bottom: 20px; }
+        .icon { width: 65px; margin-bottom: 15px; filter: drop-shadow(0 3px 6px rgba(2, 136, 209, 0.3)); }
+        textarea { width: 100%; height: 250px; padding: 15px; border: 2px solid #0288d1; border-radius: 15px; font-size: 16px; color: #333; resize: none; background: #f5faff; transition: border-color 0.3s ease; }
+        textarea:focus { border-color: #0277bd; outline: none; }
+        .button-group { margin-top: 20px; }
+        button { padding: 12px 30px; background: #26a69a; color: white; border: none; border-radius: 30px; font-size: 16px; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; margin: 0 10px; }
+        button:hover { transform: scale(1.05); background: #00897b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://img.icons8.com/ios-filled/65/0288d1/microphone.png" alt="Voice to Text Icon" class="icon">
+        <h1>Voice to Text</h1>
+        <textarea id="textOutput" placeholder="Yahan text ayega..."></textarea>
+        <div class="button-group">
+            <button onclick="startRecording()">Start Recording</button>
+            <button onclick="stopRecording()">Stop Recording</button>
+        </div>
+    </div>
+
+    <script>
+        let recognition;
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            recognition.onresult = (event) => {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                document.getElementById('textOutput').value = transcript;
+            };
+
+            recognition.onerror = (event) => {
+                alert("Error: " + event.error);
+            };
+        } else {
+            alert("Yeh browser voice recognition support nahi karta!");
+        }
+
+        function startRecording() {
+            if (recognition) {
+                recognition.start();
+            }
+        }
+
+        function stopRecording() {
+            if (recognition) {
+                recognition.stop();
+                const text = document.getElementById('textOutput').value;
+                if (text) {
+                    const blob = new Blob([text], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'voice_to_text.txt';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
