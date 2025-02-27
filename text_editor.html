@@ -38,12 +38,11 @@
             a.href = url;
             a.download = 'edited_text.txt';
             a.click();
-            URL.revokeObjectURL(url); // Memory cleanup
+            URL.revokeObjectURL(url);
         }
 
         function clearText() {
-            const textInput = document.getElementById('textInput');
-            textInput.value = '';
+            document.getElementById('textInput').value = '';
         }
     </script>
 </body>
