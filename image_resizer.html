@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer - ToolVerse</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .container { background: white; width: 480px; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; }
+        h1 { font-size: 30px; color: #0288d1; margin-bottom: 20px; }
+        .icon { width: 65px; margin-bottom: 15px; filter: drop-shadow(0 3px 6px rgba(2, 136, 209, 0.3)); }
+        .input-group { margin: 25px 0; }
+        input[type="file"] { display: none; }
+        .custom-file-upload { display: inline-block; padding: 12px 30px; background: #0288d1; color: white; border-radius: 30px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; }
+        .custom-file-upload:hover { background: #0277bd; transform: scale(1.03); }
+        .size-inputs { margin-top: 20px; display: flex; justify-content: center; gap: 15px; }
+        .size-inputs input { padding: 10px; width: 100px; border: 2px solid #0288d1; border-radius: 12px; font-size: 15px; color: #0288d1; background: #f5faff; }
+        button { padding: 14px 35px; background: #26a69a; color: white; border: none; border-radius: 30px; font-size: 16px; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
+        button:hover { transform: scale(1.05); background: #00897b; }
+        .download-link { display: none; margin-top: 25px; padding: 10px 20px; background: #0288d1; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: background 0.3s ease; }
+        .download-link:hover { background: #01579b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://img.icons8.com/ios-filled/65/0288d1/resize.png" alt="Image Resizer Icon" class="icon">
+        <h1>Image Resizer</h1>
+        <div class="input-group">
+            <label for="imageInput" class="custom-file-upload">Choose Image</label>
+            <input type="file" id="imageInput" accept="image/*">
+            <div class="size-inputs">
+                <input type="number" id="width" placeholder="Width (px)" min="1">
+                <input type="number" id="height" placeholder="Height (px)" min="1">
+            </div>
+        </div>
+        <button onclick="resizeImage()">Resize Now</button>
+        <a id="downloadLink" class="download-link" download="resized_image.jpg">Download Resized Image</a>
+    </div>
+
+    <script>
+        async function resizeImage() {
+            const fileInput = document.getElementById('imageInput');
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const file = fileInput.files[0];
+
+            if (!file || !width || !height) {
+                alert("Pehle image aur dimensions chuno!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('width', width);
+            formData.append('height', height);
+
+            try {
+                const response = await fetch('http://localhost:5000/resize', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Resize failed');
+                }
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = url;
+                downloadLink.style.display = 'inline-block';
+                downloadLink.click();
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error: " + error.message);
+            }
+        }
+
+        document.getElementById('imageInput').addEventListener('change', function() {
+            const fileName = this.files[0]?.name || "Koi file nahi chuni";
+            document.querySelector('.custom-file-upload').textContent = fileName.slice(0, 20) + (fileName.length > 20 ? "..." : "");
+        });
+    </script>
+</body>
+</html>
