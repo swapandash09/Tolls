@@ -44,14 +44,19 @@
                     method: 'POST',
                     body: formData
                 });
-                if (!response.ok) throw new Error('Network error');
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Conversion failed');
+                }
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
                 const downloadLink = document.getElementById('downloadLink');
                 downloadLink.href = url;
                 downloadLink.style.display = 'inline-block';
+                downloadLink.click(); // Auto-download trigger
             } catch (error) {
-                alert("Conversion failed: " + error.message);
+                console.error("Error:", error);
+                alert("Error: " + error.message);
             }
         }
         document.getElementById('pdfInput').addEventListener('change', function() {
