@@ -6,7 +6,12 @@ import os
 
 app = Flask(__name__)
 
-# Image Compressor (Updated)
+# Basic route to check if server is running
+@app.route('/', methods=['GET'])
+def health_check():
+    return "ToolVerse Backend is Running!", 200
+
+# Image Compressor
 @app.route('/compress', methods=['POST'])
 def compress_image():
     try:
@@ -18,7 +23,7 @@ def compress_image():
         quality = int(request.form.get('quality', 70))
         print(f"Received file: {file.filename}, Quality: {quality}")
         
-        img = Image.open(file.stream)  # Use stream directly
+        img = Image.open(file.stream)
         img = img.resize((int(img.width / 2), int(img.height / 2)), Image.Resampling.LANCZOS)
         output_path = 'compressed_image.jpg'
         img.save(output_path, quality=quality, optimize=True)
@@ -128,4 +133,5 @@ def pick_color():
         return f"Error: {str(e)}", 500
 
 if __name__ == '__main__':
+    print("Starting ToolVerse Backend...")
     app.run(host='0.0.0.0', port=5000, debug=True)
