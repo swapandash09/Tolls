@@ -6,29 +6,69 @@
     <title>ToolVerse - Your Ultimate Toolkit</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; color: #333; }
-        .navbar { background: #0288d1; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(2, 136, 209, 0.2); position: sticky; top: 0; z-index: 10; }
+        body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; color: #333; overflow-x: hidden; }
+
+        /* Intro Section */
+        .intro { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 136, 209, 0.95); color: white; display: flex; justify-content: center; align-items: center; flex-direction: column; z-index: 100; animation: fadeOut 3s forwards; }
+        .intro h2 { font-size: 48px; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); }
+        .intro p { font-size: 20px; margin-top: 10px; }
+        @keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; display: none; } }
+
+        /* Navbar */
+        .navbar { background: #0288d1; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(2, 136, 209, 0.2); position: sticky; top: 0; z-index: 10; }
         .navbar h1 { font-size: 28px; color: white; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+        .nav-links { display: flex; }
         .nav-links a { color: white; text-decoration: none; margin: 0 20px; font-size: 16px; transition: color 0.3s ease, transform 0.3s ease; }
         .nav-links a:hover { color: #ffd700; transform: scale(1.1); }
+        .menu-toggle { display: none; font-size: 28px; color: white; cursor: pointer; }
+
+        /* Hero Section */
         .hero { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #0288d1, #26a69a); color: white; clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
         .hero h2 { font-size: 40px; margin-bottom: 15px; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); }
         .hero p { font-size: 20px; font-weight: 300; }
-        .dashboard { display: flex; flex-wrap: wrap; justify-content: center; padding: 50px 20px; gap: 25px; }
-        .tool-card { background: white; width: 280px; padding: 25px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+
+        /* Dashboard */
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; padding: 50px 20px; max-width: 1200px; margin: 0 auto; }
+        .tool-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .tool-card:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); }
         .tool-card img { width: 60px; margin-bottom: 15px; filter: drop-shadow(0 2px 5px rgba(2, 136, 209, 0.3)); }
         .tool-card h3 { font-size: 20px; color: #0288d1; margin-bottom: 10px; }
         .tool-card a { display: inline-block; padding: 10px 20px; background: #26a69a; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: background 0.3s ease, transform 0.3s ease; }
         .tool-card a:hover { background: #00897b; transform: scale(1.05); }
+
+        /* Footer */
         .footer { background: #0288d1; color: white; text-align: center; padding: 20px; font-size: 14px; }
         .footer a { color: #ffd700; text-decoration: none; margin: 0 10px; transition: color 0.3s ease; }
         .footer a:hover { color: #fff176; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; flex-wrap: wrap; }
+            .navbar h1 { font-size: 24px; }
+            .nav-links { display: none; flex-direction: column; width: 100%; background: #0277bd; position: absolute; top: 60px; left: 0; padding: 20px; }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 10px 0; font-size: 18px; }
+            .menu-toggle { display: block; }
+            .hero { padding: 60px 15px; }
+            .hero h2 { font-size: 32px; }
+            .hero p { font-size: 16px; }
+            .dashboard { padding: 30px 15px; }
+            .intro h2 { font-size: 32px; }
+            .intro p { font-size: 16px; }
+        }
     </style>
 </head>
 <body>
+    <!-- Intro Section -->
+    <div class="intro">
+        <h2>Welcome to ToolVerse</h2>
+        <p>Unleash your productivity with our innovative tools!</p>
+    </div>
+
+    <!-- Navbar -->
     <div class="navbar">
         <h1>ToolVerse</h1>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#services">Services</a>
@@ -37,10 +77,14 @@
             <a href="#terms">T&C</a>
         </div>
     </div>
+
+    <!-- Hero Section -->
     <div class="hero">
         <h2>ToolVerse - Your Ultimate Toolkit</h2>
         <p>Empower your workflow with seamless, innovative tools.</p>
     </div>
+
+    <!-- Dashboard -->
     <div class="dashboard">
         <div class="tool-card">
             <img src="https://img.icons8.com/ios-filled/60/0288d1/image.png" alt="Image Compressor Icon">
@@ -48,7 +92,7 @@
             <a href="image_compressor.html">Use Now</a>
         </div>
         <div class="tool-card">
-            <img src="https://img.icons8.com/ios-filled/60/0288d1/pdf.png" alt="PDF to JPG Icon">
+            <img src="https://img.icons8.com/ios-filled/60/d81b60/pdf.png" alt="PDF to JPG Icon">
             <h3>PDF to JPG</h3>
             <a href="pdf_to_jpg.html">Use Now</a>
         </div>
@@ -62,17 +106,52 @@
             <h3>File Merger</h3>
             <a href="file_merger.html">Use Now</a>
         </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/resize.png" alt="Image Resizer Icon">
+            <h3>Image Resizer</h3>
+            <a href="image_resizer.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/qr-code.png" alt="QR Code Generator Icon">
+            <h3>QR Code Generator</h3>
+            <a href="qr_code_generator.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/color-dropper.png" alt="Color Picker Icon">
+            <h3>Color Picker</h3>
+            <a href="color_picker.html">Use Now</a>
+        </div>
+        <div class="tool-card">
+            <img src="https://img.icons8.com/ios-filled/60/0288d1/microphone.png" alt="Voice to Text Icon">
+            <h3>Voice to Text</h3>
+            <a href="voice_to_text.html">Use Now</a>
+        </div>
     </div>
+
+    <!-- Footer -->
     <div class="footer">
         <p>© 2025 ToolVerse | <a href="#about">About</a> | <a href="#services">Services</a> | <a href="#contact">Contact</a> | <a href="#team">Team</a> | <a href="#terms">Terms & Conditions</a></p>
     </div>
+
     <script>
+        // Smooth Scroll for Nav Links
         document.querySelectorAll('.nav-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Hide Intro after animation
+        setTimeout(() => {
+            document.querySelector('.intro').style.display = 'none';
+        }, 3000);
     </script>
 </body>
 </html>
