@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker - ToolVerse</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .container { background: white; width: 480px; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; }
+        h1 { font-size: 30px; color: #0288d1; margin-bottom: 20px; }
+        .icon { width: 65px; margin-bottom: 15px; filter: drop-shadow(0 3px 6px rgba(2, 136, 209, 0.3)); }
+        .input-group { margin: 25px 0; }
+        input[type="file"] { display: none; }
+        .custom-file-upload { display: inline-block; padding: 12px 30px; background: #0288d1; color: white; border-radius: 30px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; }
+        .custom-file-upload:hover { background: #0277bd; transform: scale(1.03); }
+        button { padding: 14px 35px; background: #26a69a; color: white; border: none; border-radius: 30px; font-size: 16px; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
+        button:hover { transform: scale(1.05); background: #00897b; }
+        #colorDisplay { width: 100px; height: 100px; margin: 20px auto; border: 2px solid #0288d1; border-radius: 10px; }
+        #colorCode { font-size: 18px; color: #0288d1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://img.icons8.com/ios-filled/65/0288d1/color-dropper.png" alt="Color Picker Icon" class="icon">
+        <h1>Color Picker</h1>
+        <div class="input-group">
+            <label for="imageInput" class="custom-file-upload">Choose Image</label>
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+        <button onclick="pickColor()">Pick Color</button>
+        <div id="colorDisplay"></div>
+        <p id="colorCode"></p>
+    </div>
+
+    <script>
+        async function pickColor() {
+            const fileInput = document.getElementById('imageInput');
+            const file = fileInput.files[0];
+            if (!file) { alert("Pehle ek image chuno!"); return; }
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch('http://localhost:5000/pick-color', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Color pick failed');
+                }
+                const data = await response.json();
+                const color = data.color;
+                document.getElementById('colorDisplay').style.backgroundColor = color;
+                document.getElementById('colorCode').textContent = `Color: ${color}`;
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error: " + error.message);
+            }
+        }
+
+        document.getElementById('imageInput').addEventListener('change', function() {
+            const fileName = this.files[0]?.name || "Koi file nahi chuni";
+            document.querySelector('.custom-file-upload').textContent = fileName.slice(0, 20) + (fileName.length > 20 ? "..." : "");
+        });
+    </script>
+</body>
+</html>
