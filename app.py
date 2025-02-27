@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-# Image Compressor
+# Image Compressor (Updated)
 @app.route('/compress', methods=['POST'])
 def compress_image():
     try:
@@ -17,12 +17,20 @@ def compress_image():
             return "No file selected", 400
         quality = int(request.form.get('quality', 70))
         print(f"Received file: {file.filename}, Quality: {quality}")
-        img = Image.open(file)
+        
+        img = Image.open(file.stream)  # Use stream directly
         img = img.resize((int(img.width / 2), int(img.height / 2)), Image.Resampling.LANCZOS)
         output_path = 'compressed_image.jpg'
         img.save(output_path, quality=quality, optimize=True)
         print(f"Saved file to: {output_path}")
-        response = send_file(output_path, as_attachment=True, download_name='compressed_image.jpg')
+        
+        with open(output_path, 'rb') as f:
+            response = send_file(
+                f,
+                mimetype='image/jpeg',
+                as_attachment=True,
+                download_name='compressed_image.jpg'
+            )
         os.remove(output_path)
         return response
     except Exception as e:
