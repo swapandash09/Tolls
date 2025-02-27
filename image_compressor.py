@@ -1,42 +1,43 @@
 from flask import Flask, request, send_file
 from PIL import Image
-from pdf2image import convert_from_path
-from PyPDF2 import PdfMerger
 import os
 
 app = Flask(__name__)
 
-# Image Compressor
+@app.route('/', methods=['GET'])
+def health_check():
+    return "Image Compressor Backend is Running!", 200
+
 @app.route('/compress', methods=['POST'])
 def compress_image():
-    file = request.files['image']
-    quality = int(request.form['quality'])
-    img = Image.open(file)
-    img = img.resize((int(img.width / 2), int(img.height / 2)), Image.Resampling.LANCZOS)
-    img.save('compressed_image.jpg', quality=quality, optimize=True)
-    return send_file('compressed_image.jpg', as_attachment=True)
-
-# PDF to JPG
-@app.route('/pdf2jpg', methods=['POST'])
-def pdf_to_jpg():
-    file = request.files['pdf']
-    pdf_path = 'input.pdf'
-    file.save(pdf_path)
-    images = convert_from_path(pdf_path, dpi=300)
-    images[0].save('converted_image.jpg', 'JPEG', quality=95)
-    os.remove(pdf_path)
-    return send_file('converted_image.jpg', as_attachment=True)
-
-# File Merger
-@app.route('/merge', methods=['POST'])
-def merge_files():
-    files = request.files.getlist('files')
-    merger = PdfMerger()
-    for file in files:
-        merger.append(file)
-    merger.write('merged_file.pdf')
-    merger.close()
-    return send_file('merged_file.pdf', as_attachment=True)
+    try:
+        if 'image' not in request.files:
+            return "No image uploaded", 400
+        file = request.files['image']
+        if not file.filename:
+            return "No file selected", 400
+        quality = int(request.form.get('quality', 70))
+        print(f"Received file: {file.filename}, Quality: {quality}")
+        
+        img = Image.open(file.stream)
+        img = img.resize((int(img.width / 2), int(img.height / 2)), Image.Resampling.LANCZOS)
+        output_path = 'compressed_image.jpg'
+        img.save(output_path, quality=quality, optimize=True)
+        print(f"Saved file to: {output_path}")
+        
+        with open(output_path, 'rb') as f:
+            response = send_file(
+                f,
+                mimetype='image/jpeg',
+                as_attachment=True,
+                download_name='compressed_image.jpg'
+            )
+        os.remove(output_path)
+        return response
+    except Exception as e:
+        print(f"Backend Error: {str(e)}")
+        return f"Error: {str(e)}", 500
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    print("Starting Image Compressor Backend...")
+    app.run(host='0.0.0.0', port=5000, debug=True)
