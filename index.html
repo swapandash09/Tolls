@@ -3,44 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolVerse - Your Ultimate Toolkit</title>
+    <title>ToolVerse - Unleash Creativity</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #f0f4f8; min-height: 100vh; color: #333; overflow-x: hidden; }
+        body { background: linear-gradient(135deg, #1e3c72, #2a5298); min-height: 100vh; color: #fff; overflow-x: hidden; }
 
         /* Main Container */
-        .app-container { display: flex; flex-direction: column; height: 100vh; max-width: 100%; background: #fff; }
+        .app-container { display: flex; flex-direction: column; height: 100vh; max-width: 100%; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
 
         /* Header */
-        .header { background: #0288d1; padding: 15px; text-align: center; color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
-        .header h1 { font-size: 24px; }
+        .header { background: rgba(2, 136, 209, 0.9); padding: 15px; text-align: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); position: relative; }
+        .header h1 { font-size: 28px; letter-spacing: 1px; text-transform: uppercase; }
+        .menu-toggle { position: absolute; right: 15px; top: 15px; font-size: 28px; cursor: pointer; color: #ffd700; }
 
         /* Content */
-        .content { flex: 1; overflow-y: auto; padding: 15px; }
-        .section { margin-bottom: 20px; }
-        .section h2 { font-size: 18px; color: #0288d1; margin-bottom: 10px; }
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
-        .tool-item { background: #f5faff; padding: 10px; border-radius: 10px; text-align: center; transition: transform 0.2s ease; }
-        .tool-item:hover { transform: scale(1.05); }
-        .tool-item img { width: 40px; margin-bottom: 5px; }
-        .tool-item a { text-decoration: none; color: #0288d1; font-size: 14px; }
+        .content { flex: 1; overflow-y: auto; padding: 20px; }
+        .section { margin-bottom: 25px; background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+        .section h2 { font-size: 20px; color: #ffd700; margin-bottom: 15px; text-transform: uppercase; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
+        .tool-item { background: rgba(255, 255, 255, 0.15); padding: 15px; border-radius: 12px; text-align: center; transition: all 0.3s ease; border: 1px solid rgba(255, 215, 0, 0.2); }
+        .tool-item:hover { transform: translateY(-5px); background: rgba(255, 215, 0, 0.2); border-color: #ffd700; }
+        .tool-item img { width: 50px; margin-bottom: 8px; filter: brightness(0) invert(1); }
+        .tool-item a { text-decoration: none; color: #fff; font-size: 14px; font-weight: 500; }
 
-        /* Sidebar (Settings) */
-        .sidebar { position: fixed; top: 0; right: -250px; width: 250px; height: 100%; background: #0277bd; color: white; padding: 20px; transition: right 0.3s ease; z-index: 90; }
+        /* Sidebar */
+        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: rgba(2, 88, 137, 0.95); padding: 25px; transition: right 0.3s ease; z-index: 90; }
         .sidebar.active { right: 0; }
-        .sidebar h3 { font-size: 20px; margin-bottom: 20px; }
-        .sidebar a, .sidebar button { display: block; color: white; text-decoration: none; padding: 10px; margin: 5px 0; background: none; border: none; text-align: left; font-size: 16px; cursor: pointer; transition: background 0.3s ease; }
-        .sidebar a:hover, .sidebar button:hover { background: #01579b; }
+        .sidebar h3 { font-size: 22px; color: #ffd700; margin-bottom: 20px; }
+        .sidebar a, .sidebar button { display: block; color: #fff; text-decoration: none; padding: 12px; margin: 8px 0; background: rgba(255, 255, 255, 0.1); border-radius: 8px; text-align: left; font-size: 16px; cursor: pointer; transition: all 0.3s ease; border: none; }
+        .sidebar a:hover, .sidebar button:hover { background: rgba(255, 215, 0, 0.3); color: #ffd700; }
 
         /* Bottom Navigation */
-        .bottom-nav { display: flex; justify-content: space-around; background: #0288d1; padding: 10px 0; position: fixed; bottom: 0; width: 100%; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); }
-        .nav-item { color: white; text-align: center; font-size: 14px; cursor: pointer; padding: 5px; }
-        .nav-item img { width: 24px; margin-bottom: 5px; }
+        .bottom-nav { display: flex; justify-content: space-around; background: rgba(2, 136, 209, 0.9); padding: 10px 0; position: fixed; bottom: 0; width: 100%; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3); border-top: 1px solid rgba(255, 215, 0, 0.2); }
+        .nav-item { color: #fff; text-align: center; font-size: 14px; cursor: pointer; padding: 8px; transition: all 0.3s ease; }
+        .nav-item:hover { color: #ffd700; }
+        .nav-item img { width: 28px; margin-bottom: 5px; filter: brightness(0) invert(1); }
 
         /* Responsive */
         @media (min-width: 769px) {
-            .app-container { max-width: 480px; margin: 0 auto; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); }
+            .app-container { max-width: 480px; margin: 20px auto; border-radius: 20px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); }
             .sidebar { right: -300px; width: 300px; }
+            .header h1 { font-size: 32px; }
+            .tool-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -57,7 +61,7 @@
             <!-- Home Page -->
             <div class="section" id="home">
                 <h2>Home</h2>
-                <p>Welcome to ToolVerse! Your one-stop toolkit for productivity.</p>
+                <p>Unleash your creativity with ToolVerse - the ultimate toolkit for productivity.</p>
             </div>
 
             <!-- My Storage -->
@@ -71,35 +75,35 @@
                 <h2>Tools</h2>
                 <div class="tool-grid">
                     <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/0288d1/image.png" alt="Image Compressor">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/image.png" alt="Image Compressor">
                         <a href="image_compressor.html">Image Compressor</a>
                     </div>
                     <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/d81b60/pdf.png" alt="PDF to JPG">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/pdf.png" alt="PDF to JPG">
                         <a href="pdf_to_jpg.html">PDF to JPG</a>
                     </div>
                     <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/f57c00/edit.png" alt="Text Editor">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/edit.png" alt="Text Editor">
                         <a href="text_editor.html">Text Editor</a>
                     </div>
                     <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/388e3c/merge-files.png" alt="File Merger">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/merge-files.png" alt="File Merger">
                         <a href="file_merger.html">File Merger</a>
                     </div>
                     <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/0288d1/resize.png" alt="Image Resizer">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/resize.png" alt="Image Resizer">
                         <a href="image_resizer.html">Image Resizer</a>
                     </div>
                     <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/0288d1/qr-code.png" alt="QR Code Generator">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/qr-code.png" alt="QR Code Generator">
                         <a href="qr_code_generator.html">QR Code Generator</a>
                     </div>
                     <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/0288d1/color-dropper.png" alt="Color Picker">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/color-dropper.png" alt="Color Picker">
                         <a href="color_picker.html">Color Picker</a>
                     </div>
                     <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/0288d1/microphone.png" alt="Voice to Text">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Voice to Text">
                         <a href="voice_to_text.html">Voice to Text</a>
                     </div>
                 </div>
@@ -109,8 +113,8 @@
             <div class="section" id="scanner" style="display: none;">
                 <h2>Scanner</h2>
                 <p>Scan images and convert to PDF.</p>
-                <button>Scan Image</button>
-                <button>Convert to PDF</button>
+                <button style="background: #26a69a; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer;">Scan Image</button>
+                <button style="background: #26a69a; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer; margin-left: 10px;">Convert to PDF</button>
             </div>
         </div>
 
