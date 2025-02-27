@@ -60,14 +60,16 @@
                 });
                 if (!response.ok) {
                     const errorText = await response.text();
-                    throw new Error(errorText || 'Something went wrong');
+                    throw new Error(errorText || 'Compression failed');
                 }
                 const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
                 const downloadLink = document.getElementById('downloadLink');
                 downloadLink.href = url;
                 downloadLink.style.display = 'inline-block';
+                downloadLink.click(); // Auto-download trigger
             } catch (error) {
+                console.error("Error:", error);
                 alert("Error: " + error.message);
             }
         }
