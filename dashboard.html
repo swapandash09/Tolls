@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToolVerse - Unleash Your Potential</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height: 100vh; color: #fff; overflow-x: hidden; }
@@ -13,7 +14,7 @@
 
         /* Header */
         .header { background: linear-gradient(90deg, #00c4cc, #7d2ae8); padding: 20px; text-align: center; box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4); position: relative; }
-        .header h1 { font-size: 28px; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #fff, #e0e0e0); -webkit-background-clip: text; color: transparent; }
+        .header h1 { font-size: 28px; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #fff, #e0e0e0); -webkit-background-clip: text; color: transparent; font-weight: 600; }
         .menu-toggle { position: absolute; right: 20px; top: 20px; font-size: 30px; cursor: pointer; color: #fff; transition: transform 0.3s ease; }
         .menu-toggle:hover { transform: rotate(90deg); }
 
@@ -21,14 +22,22 @@
         .content { flex: 1; overflow-y: auto; padding: 25px; }
         .section { margin-bottom: 30px; background: rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease; }
         .section:hover { transform: translateY(-5px); }
-        .section h2 { font-size: 22px; color: #00c4cc; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .section h2 { font-size: 22px; color: #00c4cc; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; }
+        .section h2 img { width: 24px; margin-right: 10px; filter: brightness(0) saturate(100%) invert(70%) sepia(90%) hue-rotate(160deg); }
         .tagline { font-size: 18px; color: #e0e0e0; font-style: italic; margin-top: 10px; text-align: center; }
+        
+        /* Tools Grid */
         .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 20px; }
         .tool-item { background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 15px; text-align: center; transition: all 0.3s ease; border: 2px solid rgba(0, 196, 204, 0.3); }
         .tool-item:hover { transform: scale(1.05); background: rgba(0, 196, 204, 0.2); border-color: #00c4cc; }
         .tool-item img { width: 50px; margin-bottom: 10px; filter: brightness(0) saturate(100%) invert(70%) sepia(90%) hue-rotate(160deg); }
         .tool-item a { text-decoration: none; color: #e0e0e0; font-size: 15px; font-weight: 600; transition: color 0.3s ease; }
         .tool-item a:hover { color: #00c4cc; }
+
+        /* Storage Permission */
+        .storage-permission { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; }
+        .storage-permission button { background: #7d2ae8; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer; transition: all 0.3s ease; }
+        .storage-permission button:hover { background: #00c4cc; }
 
         /* Sidebar */
         .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: linear-gradient(135deg, #2c5364, #0f2027); padding: 30px; transition: right 0.3s ease; z-index: 90; }
@@ -65,19 +74,22 @@
         <div class="content">
             <!-- Home Page -->
             <div class="section" id="home">
-                <h2>Home</h2>
+                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home Icon"> Home</h2>
                 <p class="tagline">"Unleash your potential with tools that inspire."</p>
             </div>
 
             <!-- My Storage -->
             <div class="section" id="storage" style="display: none;">
-                <h2>My Storage</h2>
+                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/folder.png" alt="Storage Icon"> My Storage</h2>
                 <p>Your saved files will appear here.</p>
+                <div class="storage-permission">
+                    <button onclick="requestStoragePermission()">Grant Storage Permission</button>
+                </div>
             </div>
 
             <!-- Tools -->
             <div class="section" id="tools" style="display: none;">
-                <h2>Tools</h2>
+                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/toolbox.png" alt="Tools Icon"> Tools</h2>
                 <div class="tool-grid">
                     <div class="tool-item">
                         <img src="https://img.icons8.com/ios-filled/50/ffffff/image.png" alt="Image Compressor">
@@ -116,23 +128,46 @@
 
             <!-- Scanner -->
             <div class="section" id="scanner" style="display: none;">
-                <h2>Scanner</h2>
+                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/scanner.png" alt="Scanner Icon"> Scanner</h2>
                 <p>Scan images and convert to PDF.</p>
                 <button style="background: #7d2ae8; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer;">Scan Image</button>
                 <button style="background: #7d2ae8; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer; margin-left: 10px;">Convert to PDF</button>
+            </div>
+
+            <!-- About -->
+            <div class="section" id="about" style="display: none;">
+                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/info.png" alt="About Icon"> About</h2>
+                <p>ToolVerse is your ultimate toolkit designed to boost productivity and creativity. Built with love for innovators.</p>
+            </div>
+
+            <!-- Services -->
+            <div class="section" id="services" style="display: none;">
+                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/services.png" alt="Services Icon"> Services</h2>
+                <p>We offer a range of tools including file compression, conversion, editing, and more to simplify your workflow.</p>
+            </div>
+
+            <!-- Contact Details -->
+            <div class="section" id="contact" style="display: none;">
+                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/contact-card.png" alt="Contact Icon"> Contact Details</h2>
+                <p>Email: support@toolverse.com<br>Phone: +91 123-456-7890<br>Address: Tech Hub, Innovation City</p>
             </div>
         </div>
 
         <!-- Sidebar (Settings) -->
         <div class="sidebar">
             <h3>Settings</h3>
-            <a href="#">Profile</a>
+            <a href="#" onclick="showSection('home'); toggleSidebar();">Home</a>
+            <a href="#" onclick="showSection('storage'); toggleSidebar();">My Storage</a>
+            <a href="#" onclick="showSection('tools'); toggleSidebar();">Tools</a>
+            <a href="#" onclick="showSection('scanner'); toggleSidebar();">Scanner</a>
+            <a href="#" onclick="showSection('about'); toggleSidebar();">About</a>
+            <a href="#" onclick="showSection('services'); toggleSidebar();">Services</a>
+            <a href="#" onclick="showSection('contact'); toggleSidebar();">Contact</a>
             <a href="#">Login / Signup</a>
             <a href="#">Current Membership</a>
             <a href="#">Themes</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms & Conditions</a>
-            <a href="#">About Us</a>
             <a href="#">Help</a>
             <button onclick="shareApp()">Share</button>
         </div>
@@ -182,6 +217,19 @@
                 }).catch(err => console.log('Share failed:', err));
             } else {
                 alert("Share feature not supported on this browser.");
+            }
+        }
+
+        // Storage Permission (Dummy Function)
+        function requestStoragePermission() {
+            if (navigator.storage && navigator.storage.request) {
+                navigator.storage.request().then(() => {
+                    alert("Storage permission granted!");
+                }).catch(err => {
+                    alert("Storage permission denied: " + err);
+                });
+            } else {
+                alert("Storage permission not supported in this browser.");
             }
         }
 
