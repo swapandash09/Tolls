@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolVerse Intro</title>
+    <title>ToolVerse - Unleash Your Potential</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: linear-gradient(135deg, #0f2027, #203a43); height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; color: #fff; }
-        .intro { text-align: center; animation: fadeOut 3s forwards; }
-        .logo { width: 100px; height: 100px; margin-bottom: 25px; animation: pulse 2s infinite ease-in-out; }
-        h2 { font-size: 36px; letter-spacing: 2px; background: linear-gradient(90deg, #00c4cc, #7d2ae8); -webkit-background-clip: text; color: transparent; }
-        p { font-size: 18px; color: #e0e0e0; font-style: italic; margin-top: 10px; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; color: #fff; overflow: hidden; }
+        .intro { text-align: center; animation: fadeOut 3s forwards; position: relative; z-index: 1; }
+        .logo { width: 120px; height: 120px; margin-bottom: 30px; animation: pulse 2s infinite ease-in-out; filter: drop-shadow(0 0 15px rgba(0, 196, 204, 0.5)); }
+        h2 { font-size: 40px; letter-spacing: 3px; background: linear-gradient(90deg, #00c4cc, #7d2ae8); -webkit-background-clip: text; color: transparent; font-weight: 600; }
+        p { font-size: 20px; color: #e0e0e0; font-style: italic; margin-top: 15px; }
+        .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0, 196, 204, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%); z-index: 0; }
         @keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
         @media (min-width: 769px) {
-            h2 { font-size: 48px; }
-            p { font-size: 20px; }
-            .logo { width: 120px; height: 120px; }
+            h2 { font-size: 50px; }
+            p { font-size: 24px; }
+            .logo { width: 150px; height: 150px; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-overlay"></div>
     <div class="intro">
         <svg class="logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 10 L70 40 L60 40 L60 80 L40 80 L40 40 L30 40 Z" fill="url(#grad1)" stroke="#00c4cc" stroke-width="4"/>
