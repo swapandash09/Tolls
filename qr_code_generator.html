@@ -5,25 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator - ToolVerse</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-        .container { background: white; width: 480px; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center; }
-        h1 { font-size: 30px; color: #0288d1; margin-bottom: 20px; }
-        .icon { width: 65px; margin-bottom: 15px; filter: drop-shadow(0 3px 6px rgba(2, 136, 209, 0.3)); }
-        .input-group { margin: 25px 0; }
-        input[type="text"] { padding: 12px; width: 100%; border: 2px solid #0288d1; border-radius: 12px; font-size: 15px; color: #0288d1; background: #f5faff; }
-        button { padding: 14px 35px; background: #26a69a; color: white; border: none; border-radius: 30px; font-size: 16px; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
-        button:hover { transform: scale(1.05); background: #00897b; }
-        #qrOutput { margin-top: 25px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43); min-height: 100vh; display: flex; justify-content: center; align-items: center; color: #fff; }
+        .container { background: rgba(255, 255, 255, 0.1); width: 400px; padding: 20px; border-radius: 10px; text-align: center; }
+        h1 { font-size: 24px; color: #00c4cc; margin-bottom: 20px; }
+        input { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none; }
+        button { padding: 10px 20px; background: #26a69a; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+        #qrOutput { margin-top: 20px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://img.icons8.com/ios-filled/65/0288d1/qr-code.png" alt="QR Code Generator Icon" class="icon">
         <h1>QR Code Generator</h1>
-        <div class="input-group">
-            <input type="text" id="qrInput" placeholder="Enter text or URL">
-        </div>
+        <input type="text" id="qrInput" placeholder="Enter text or URL">
         <button onclick="generateQR()">Generate QR</button>
         <div id="qrOutput"></div>
     </div>
@@ -34,15 +28,14 @@
             const text = document.getElementById('qrInput').value;
             if (!text) { alert("Pehle text ya URL daalo!"); return; }
             const qrOutput = document.getElementById('qrOutput');
-            qrOutput.innerHTML = ''; // Clear previous QR
+            qrOutput.innerHTML = '';
             new QRCode(qrOutput, {
                 text: text,
-                width: 200,
-                height: 200,
-                colorDark: "#0288d1",
+                width: 150,
+                height: 150,
+                colorDark: "#00c4cc",
                 colorLight: "#ffffff"
             });
-            // Auto-download QR as image
             setTimeout(() => {
                 const canvas = qrOutput.querySelector('canvas');
                 const url = canvas.toDataURL('image/png');
