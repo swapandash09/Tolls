@@ -3,309 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolVerse - Unleash Your Potential</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>ToolVerse - Dashboard</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height: 100vh; color: #fff; overflow-x: hidden; }
-
-        /* Main Container */
-        .app-container { display: flex; flex-direction: column; height: 100vh; max-width: 100%; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); }
-
-        /* Header */
-        .header { background: linear-gradient(90deg, #00c4cc, #7d2ae8); padding: 20px; text-align: center; box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4); position: relative; }
-        .header h1 { font-size: 28px; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #fff, #e0e0e0); -webkit-background-clip: text; color: transparent; font-weight: 600; }
-        .menu-toggle { position: absolute; right: 20px; top: 20px; font-size: 30px; cursor: pointer; color: #fff; transition: transform 0.3s ease; }
-        .menu-toggle:hover { transform: rotate(90deg); }
-
-        /* Content */
-        .content { flex: 1; overflow-y: auto; padding: 25px; }
-        .section { margin-bottom: 30px; background: rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease; }
-        .section:hover { transform: translateY(-5px); }
-        .section h2 { font-size: 22px; color: #00c4cc; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; }
-        .section h2 img { width: 24px; margin-right: 10px; filter: brightness(0) saturate(100%) invert(70%) sepia(90%) hue-rotate(160deg); }
-        .tagline { font-size: 18px; color: #e0e0e0; font-style: italic; margin-top: 10px; text-align: center; }
-        .section p { font-size: 16px; color: #e0e0e0; line-height: 1.5; }
-
-        /* Tools Grid */
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; }
-        .tool-item { background: rgba(255, 255, 255, 0.12); padding: 15px; border-radius: 12px; text-align: center; transition: all 0.3s ease; border: 2px solid rgba(0, 196, 204, 0.4); display: flex; flex-direction: column; align-items: center; }
-        .tool-item:hover { transform: scale(1.1); background: rgba(0, 196, 204, 0.25); border-color: #00c4cc; }
-        .tool-item img { width: 40px; margin-bottom: 8px; filter: brightness(0) saturate(100%) invert(70%) sepia(90%) hue-rotate(160deg); }
-        .tool-item a { text-decoration: none; color: #e0e0e0; font-size: 14px; font-weight: 600; transition: color 0.3s ease; }
-        .tool-item a:hover { color: #00c4cc; }
-
-        /* Storage Permission */
-        .storage-permission { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; }
-        .storage-permission button { background: #7d2ae8; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer; transition: all 0.3s ease; }
-        .storage-permission button:hover { background: #00c4cc; }
-
-        /* Sidebar */
-        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: linear-gradient(135deg, #2c5364, #0f2027); padding: 30px; transition: right 0.3s ease; z-index: 90; }
-        .sidebar.active { right: 0; }
-        .sidebar h3 { font-size: 24px; color: #00c4cc; margin-bottom: 25px; text-transform: uppercase; }
-        .sidebar a, .sidebar button { display: block; color: #e0e0e0; text-decoration: none; padding: 12px 15px; margin: 8px 0; background: rgba(255, 255, 255, 0.1); border-radius: 10px; text-align: left; font-size: 16px; cursor: pointer; transition: all 0.3s ease; border: none; }
-        .sidebar a:hover, .sidebar button:hover { background: rgba(0, 196, 204, 0.3); color: #fff; }
-
-        /* Themes Dropdown */
-        .theme-select { margin-top: 10px; }
-        .theme-select select { width: 100%; padding: 10px; border: 2px solid #00c4cc; border-radius: 10px; background: rgba(255, 255, 255, 0.1); color: #fff; font-size: 16px; cursor: pointer; }
-
-        /* Bottom Navigation */
-        .bottom-nav { display: flex; justify-content: space-around; background: linear-gradient(90deg, #00c4cc, #7d2ae8); padding: 15px 0; position: fixed; bottom: 0; width: 100%; box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.4); border-top: 1px solid rgba(255, 255, 255, 0.2); }
-        .nav-item { color: #fff; text-align: center; font-size: 14px; cursor: pointer; padding: 8px; transition: all 0.3s ease; }
-        .nav-item:hover { color: #e0e0e0; transform: scale(1.1); }
-        .nav-item img { width: 30px; margin-bottom: 5px; filter: brightness(0) saturate(100%) invert(100%) sepia(0%) hue-rotate(0deg); }
-
-        /* Responsive */
-        @media (min-width: 769px) {
-            .app-container { max-width: 480px; margin: 20px auto; border-radius: 25px; box-shadow: 0 0 40px rgba(0, 0, 0, 0.5); }
-            .sidebar { right: -300px; width: 300px; }
-            .header h1 { font-size: 32px; }
-            .tool-grid { grid-template-columns: repeat(2, 1fr); }
-            .tagline { font-size: 20px; }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43); min-height: 100vh; color: #fff; }
+        .app-container { display: flex; flex-direction: column; height: 100vh; }
+        .header { background: linear-gradient(90deg, #00c4cc, #7d2ae8); padding: 15px; text-align: center; }
+        .header h1 { font-size: 24px; color: #fff; }
+        .content { flex: 1; padding: 20px; }
+        .section { margin-bottom: 20px; background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; }
+        .section h2 { font-size: 20px; color: #00c4cc; margin-bottom: 10px; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
+        .tool-item { background: rgba(255, 255, 255, 0.2); padding: 10px; border-radius: 8px; text-align: center; }
+        .tool-item a { text-decoration: none; color: #e0e0e0; font-size: 14px; }
+        .bottom-nav { display: flex; justify-content: space-around; background: #00c4cc; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+        .nav-item { color: #fff; font-size: 14px; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- Header -->
         <div class="header">
             <h1>ToolVerse</h1>
-            <div class="menu-toggle" onclick="toggleSidebar()">⚙️</div>
         </div>
-
-        <!-- Content -->
         <div class="content">
-            <!-- Home Page -->
             <div class="section" id="home">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home Icon"> Home</h2>
-                <p class="tagline">"Unleash your potential with tools that inspire."</p>
+                <h2>Home</h2>
+                <p>Welcome to ToolVerse! Your ultimate toolkit awaits.</p>
             </div>
-
-            <!-- My Storage -->
-            <div class="section" id="storage" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/folder.png" alt="Storage Icon"> My Storage</h2>
-                <p>Your saved files will appear here.</p>
-                <div class="storage-permission">
-                    <button onclick="requestStoragePermission()">Grant Storage Permission</button>
-                </div>
-            </div>
-
-            <!-- Tools -->
             <div class="section" id="tools" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/toolbox.png" alt="Tools Icon"> Tools</h2>
+                <h2>Tools</h2>
                 <div class="tool-grid">
-                    <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/image.png" alt="Image Compressor">
-                        <a href="image_compressor.html">Image Compressor</a>
-                    </div>
-                    <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/pdf.png" alt="PDF to JPG">
-                        <a href="pdf_to_jpg.html">PDF to JPG</a>
-                    </div>
-                    <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/edit.png" alt="Text Editor">
-                        <a href="text_editor.html">Text Editor</a>
-                    </div>
-                    <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/merge-files.png" alt="File Merger">
-                        <a href="file_merger.html">File Merger</a>
-                    </div>
-                    <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/resize.png" alt="Image Resizer">
-                        <a href="image_resizer.html">Image Resizer</a>
-                    </div>
-                    <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/qr-code.png" alt="QR Code Generator">
-                        <a href="qr_code_generator.html">QR Code Generator</a>
-                    </div>
-                    <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/color-dropper.png" alt="Color Picker">
-                        <a href="color_picker.html">Color Picker</a>
-                    </div>
-                    <div class="tool-item">
-                        <img src="https://img.icons8.com/ios-filled/50/ffffff/microphone.png" alt="Voice to Text">
-                        <a href="voice_to_text.html">Voice to Text</a>
-                    </div>
+                    <div class="tool-item"><a href="tools/image_compressor.html">Image Compressor</a></div>
+                    <div class="tool-item"><a href="tools/pdf_to_jpg.html">PDF to JPG</a></div>
+                    <div class="tool-item"><a href="tools/text_editor.html">Text Editor</a></div>
+                    <div class="tool-item"><a href="tools/file_merger.html">File Merger</a></div>
+                    <div class="tool-item"><a href="tools/image_resizer.html">Image Resizer</a></div>
+                    <div class="tool-item"><a href="tools/qr_code_generator.html">QR Code Generator</a></div>
+                    <div class="tool-item"><a href="tools/color_picker.html">Color Picker</a></div>
+                    <div class="tool-item"><a href="tools/voice_to_text.html">Voice to Text</a></div>
                 </div>
             </div>
-
-            <!-- Scanner -->
-            <div class="section" id="scanner" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/scanner.png" alt="Scanner Icon"> Scanner</h2>
-                <p>Scan images and convert to PDF.</p>
-                <button style="background: #7d2ae8; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer;">Scan Image</button>
-                <button style="background: #7d2ae8; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer; margin-left: 10px;">Convert to PDF</button>
-            </div>
-
-            <!-- About -->
-            <div class="section" id="about" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/info.png" alt="About Icon"> About</h2>
-                <p>ToolVerse is your ultimate toolkit designed to boost productivity and creativity. Built with love for innovators by a passionate team dedicated to simplifying your workflow.</p>
-            </div>
-
-            <!-- Services -->
-            <div class="section" id="services" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/services.png" alt="Services Icon"> Services</h2>
-                <p>We offer premium tools including file compression, PDF conversion, text editing, file merging, image resizing, QR code generation, color picking, and voice-to-text transcription—all in one place.</p>
-            </div>
-
-            <!-- Contact Details -->
-            <div class="section" id="contact" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/contact-card.png" alt="Contact Icon"> Contact Details</h2>
-                <p>Email: support@toolverse.com<br>Phone: +91 123-456-7890<br>Address: Tech Hub, Innovation City, 12345<br>Follow us on: <a href="#" style="color: #00c4cc;">Twitter</a> | <a href="#" style="color: #00c4cc;">Instagram</a></p>
-            </div>
-
-            <!-- Profile -->
-            <div class="section" id="profile" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/user.png" alt="Profile Icon"> Profile</h2>
-                <p>Name: [Your Name]<br>Email: user@example.com<br>Joined: February 27, 2025<br>Edit your profile details or manage account settings here.</p>
-            </div>
-
-            <!-- Login/Signup -->
-            <div class="section" id="login" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/login-rounded-right.png" alt="Login Icon"> Login / Signup</h2>
-                <p>Login to access premium features or sign up to join the ToolVerse community.<br>Email: <input type="email" placeholder="Enter email" style="padding: 8px; border-radius: 5px; border: none;"><br>Password: <input type="password" placeholder="Enter password" style="padding: 8px; border-radius: 5px; border: none; margin-top: 10px;"></p>
-                <button style="background: #7d2ae8; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer; margin-top: 10px;">Login</button>
-                <button style="background: #00c4cc; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer; margin-top: 10px; margin-left: 10px;">Signup</button>
-            </div>
-
-            <!-- Current Membership -->
-            <div class="section" id="membership" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/membership-card.png" alt="Membership Icon"> Current Membership</h2>
-                <p>Plan: Free Tier<br>Features: Basic tools access<br>Upgrade to Premium for advanced features and unlimited storage.<br><button style="background: #7d2ae8; padding: 10px 20px; border: none; border-radius: 10px; color: #fff; cursor: pointer; margin-top: 10px;">Upgrade Now</button></p>
-            </div>
-
-            <!-- Themes -->
-            <div class="section" id="themes" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/paint-palette.png" alt="Themes Icon"> Themes</h2>
-                <p>Customize your ToolVerse experience with unique themes.</p>
-                <div class="theme-select">
-                    <select onchange="applyTheme(this.value)">
-                        <option value="dark">Dark (Default)</option>
-                        <option value="light">Light</option>
-                        <option value="cosmic">Cosmic</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Privacy Policy -->
-            <div class="section" id="privacy" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/privacy.png" alt="Privacy Icon"> Privacy Policy</h2>
-                <p>We value your privacy. Your data is encrypted and never shared without consent. Read our full policy for details.</p>
-            </div>
-
-            <!-- Terms & Conditions -->
-            <div class="section" id="terms" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/document.png" alt="Terms Icon"> Terms & Conditions</h2>
-                <p>By using ToolVerse, you agree to our terms of service. Usage is subject to fair use policies and copyright laws.</p>
-            </div>
-
-            <!-- Help -->
-            <div class="section" id="help" style="display: none;">
-                <h2><img src="https://img.icons8.com/ios-filled/50/ffffff/help.png" alt="Help Icon"> Help</h2>
-                <p>Need assistance? Check our FAQ or contact support at support@toolverse.com.</p>
-            </div>
         </div>
-
-        <!-- Sidebar (Settings) -->
-        <div class="sidebar">
-            <h3>Settings</h3>
-            <a href="#" onclick="showSection('home'); toggleSidebar();">Home</a>
-            <a href="#" onclick="showSection('storage'); toggleSidebar();">My Storage</a>
-            <a href="#" onclick="showSection('tools'); toggleSidebar();">Tools</a>
-            <a href="#" onclick="showSection('scanner'); toggleSidebar();">Scanner</a>
-            <a href="#" onclick="showSection('about'); toggleSidebar();">About</a>
-            <a href="#" onclick="showSection('services'); toggleSidebar();">Services</a>
-            <a href="#" onclick="showSection('contact'); toggleSidebar();">Contact</a>
-            <a href="#" onclick="showSection('profile'); toggleSidebar();">Profile</a>
-            <a href="#" onclick="showSection('login'); toggleSidebar();">Login / Signup</a>
-            <a href="#" onclick="showSection('membership'); toggleSidebar();">Current Membership</a>
-            <a href="#" onclick="showSection('themes'); toggleSidebar();">Themes</a>
-            <a href="#" onclick="showSection('privacy'); toggleSidebar();">Privacy Policy</a>
-            <a href="#" onclick="showSection('terms'); toggleSidebar();">Terms & Conditions</a>
-            <a href="#" onclick="showSection('help'); toggleSidebar();">Help</a>
-            <button onclick="shareApp()">Share</button>
-        </div>
-
-        <!-- Bottom Navigation -->
         <div class="bottom-nav">
-            <div class="nav-item" onclick="showSection('home')">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home">
-                <p>Home</p>
-            </div>
-            <div class="nav-item" onclick="showSection('storage')">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/folder.png" alt="Storage">
-                <p>My Storage</p>
-            </div>
-            <div class="nav-item" onclick="showSection('tools')">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/toolbox.png" alt="Tools">
-                <p>Tools</p>
-            </div>
-            <div class="nav-item" onclick="showSection('scanner')">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/scanner.png" alt="Scanner">
-                <p>Scanner</p>
-            </div>
+            <div class="nav-item" onclick="showSection('home')">Home</div>
+            <div class="nav-item" onclick="showSection('tools')">Tools</div>
         </div>
     </div>
 
     <script>
-        // Sidebar Toggle
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
-        }
-
-        // Section Switch
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
                 section.style.display = 'none';
             });
             document.getElementById(sectionId).style.display = 'block';
         }
-
-        // Share App
-        function shareApp() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'ToolVerse',
-                    text: 'Check out ToolVerse - Your Ultimate Toolkit!',
-                    url: window.location.href
-                }).catch(err => console.log('Share failed:', err));
-            } else {
-                alert("Share feature not supported on this browser.");
-            }
-        }
-
-        // Storage Permission
-        function requestStoragePermission() {
-            if (navigator.storage && navigator.storage.request) {
-                navigator.storage.request().then(() => {
-                    alert("Storage permission granted!");
-                }).catch(err => {
-                    alert("Storage permission denied: " + err);
-                });
-            } else {
-                alert("Storage permission not supported in this browser.");
-            }
-        }
-
-        // Theme Switch
-        function applyTheme(theme) {
-            const body = document.body;
-            if (theme === 'light') {
-                body.style.background = 'linear-gradient(135deg, #f5f7fa, #c3cfe2)';
-                body.style.color = '#333';
-            } else if (theme === 'cosmic') {
-                body.style.background = 'linear-gradient(135deg, #1a0033, #330066, #6600cc)';
-                body.style.color = '#fff';
-            } else {
-                body.style.background = 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)';
-                body.style.color = '#fff';
-            }
-        }
-
-        // Default to Home
         showSection('home');
     </script>
 </body>
